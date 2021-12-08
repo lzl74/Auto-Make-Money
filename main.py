@@ -10,20 +10,19 @@ import sys
 
 def job():
     push_message = ''
-    try:
-        ths_trader = THSTrader(ths_xiadan_path)
-        spider = EastSpider()
-        today_kzz_list = spider.get_today_list()
-        if not today_kzz_list:
-            raise ValueError("今日没有可申购的可转债")
-        for stock_id, name in today_kzz_list:
+    ths_trader = THSTrader(ths_xiadan_path)
+    spider = EastSpider()
+    today_kzz_list = spider.get_today_list()
+    if not today_kzz_list:
+        raise ValueError("今日没有可申购的可转债")
+    for stock_id, name in today_kzz_list:
+        try:
             push_message += str(ths_trader.buy(stock_id, 100, 10000)) + '\n'
-    except Exception as e:
-        push_message += str(e)
-    finally:
-        r = requests.get('http://sc.ftqq.com/' + SCKey + '.send', params={'text': '今日可转债通知', 'desp': push_message})
-        print(r.text)
-        logger.info(push_message)
+        except Exception as e:
+            push_message += str(e)
+    r = requests.get('http://sc.ftqq.com/' + SCKey + '.send', params={'text': push_message, 'desp': push_message})
+    print(r.text)
+    logger.info(push_message)
 
 
 if __name__ == '__main__':
