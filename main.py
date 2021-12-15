@@ -21,6 +21,8 @@ def job():
                 push_message += str(ths_trader.buy(stock_id, 100, 10000)) + '\n'
             except Exception as e:
                 push_message += str(e)
+    except Exception as e:
+        push_message += str(e)
     finally:
         r = requests.get('http://sc.ftqq.com/' + SCKey + '.send', params={'text': push_message, 'desp': push_message})
         print(r.text)
