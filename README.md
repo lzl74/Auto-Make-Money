@@ -1,3 +1,6 @@
+改了一些问题 也有可能不是问题 只是我自己设置得有问题
+由于推送不太好用 新加了写文件读文件发送邮件的功能
+
 # Auto-Make-Money
 An easy tool to help investors from Shanghai/Shenzhen Stock Market to apply for new-listed convertible bonds automatically.
 Blog written in Chinese: [Click Here](https://mrxiao.net/kzz-auto.html)
